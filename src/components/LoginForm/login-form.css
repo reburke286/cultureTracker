@@ -1,0 +1,33 @@
+.login-form-box {
+    margin: 100px auto;
+    max-width: 500px;
+}
+
+.login-form-box div {
+    align-items: center;
+}
+
+.login-form-box div div{
+   min-width: 350px;
+}
+
+.login-form-box div h1{
+    color: #009688;
+ }
+
+.login-form-button {
+    background-color: #009688;
+    color: #e0f2f1;
+    max-width: 200px;
+}
+
+.login-form-button:hover {
+    color: #009688;
+    background-color: #e0f2f1;
+}
+
+.center-div {
+    margin: 100px 0px;
+    width: 1px;
+    border-left: 1px solid #009688;
+}
