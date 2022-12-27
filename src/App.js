@@ -1,4 +1,4 @@
-import { LoginForm } from "./components";
+import { LoginForm } from "./pages";
 function App() {
   return (
     <div className="App">

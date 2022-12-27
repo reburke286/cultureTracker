@@ -16,14 +16,14 @@
  }
 
 .login-form-button {
-    background-color: #009688;
-    color: #e0f2f1;
+    background-color: #009688 !important;
+    color: #e0f2f1 !important;
     max-width: 200px;
 }
 
 .login-form-button:hover {
-    color: #009688;
-    background-color: #e0f2f1;
+    color: #009688 !important;
+    background-color: #e0f2f1 !important;
 }
 
 .center-div {
