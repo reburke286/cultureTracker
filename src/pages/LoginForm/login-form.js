@@ -1,10 +1,18 @@
-import * as React from "react";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
+//import { Auth } from "aws-amplify";
 
 import "./login-form.css";
 
 export const LoginForm = () => {
+  const login = async () => {
+    console.log("login");
+    // const authResp = await Auth.signIn({ username, password });
+  };
+
+  const signup = async () => {
+    console.log("sign up");
+  };
   const CssTextField = styled(TextField, {
     shouldForwardProp: (props) => props !== "focusColor",
   })((p) => ({
@@ -74,7 +82,11 @@ export const LoginForm = () => {
               className="login-form-textfield"
               focusColor="#009688"
             />
-            <Button className="login-form-button" variant="contained">
+            <Button
+              className="login-form-button"
+              variant="contained"
+              onClick={signup}
+            >
               Sign Up
             </Button>
           </Stack>
@@ -86,7 +98,7 @@ export const LoginForm = () => {
           <h1>Login</h1>
           <Stack spacing={4}>
             <CssTextField
-              id="standard-email-input"
+              id="login-email-input"
               label="Email"
               type="email"
               autoComplete="current-email"
@@ -96,7 +108,7 @@ export const LoginForm = () => {
               focusColor="#009688"
             />
             <CssTextField
-              id="standard-password-input"
+              id="login-password-input"
               label="Password"
               type="password"
               autoComplete="current-password"
@@ -105,7 +117,11 @@ export const LoginForm = () => {
               className="login-form-textfield"
               focusColor="#009688"
             />
-            <Button className="login-form-button" variant="contained">
+            <Button
+              className="login-form-button"
+              variant="contained"
+              onClick={login}
+            >
               Login
             </Button>
           </Stack>
