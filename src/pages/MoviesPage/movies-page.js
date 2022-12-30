@@ -1,3 +1,9 @@
+import "./movies-page.css";
+
 export const MoviesPage = () => {
-  return <div>Movies Page</div>;
+  return (
+    <>
+      <h1>Movies Page</h1>
+    </>
+  );
 };
