@@ -1,40 +1,36 @@
-import { Box, Button, Stack, TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
-//import { Auth } from "aws-amplify";
+import { useState } from "react";
+import { Box, Button, Stack } from "@mui/material";
+import { FormTextfield } from "../../components/FormTextField/form-textfield";
+import { Auth } from "aws-amplify";
 
 import "./login-form.css";
 
 export const LoginForm = () => {
+  const [user, setUser] = useState({
+    email: "",
+    username: "",
+    password: "",
+    newPassword: "",
+    firstName: "",
+    lastName: "",
+  });
+  const { email, username, password, newPassword, firstName, lastName } = user;
+  const handleInputChange = (event, key) => {
+    console.log(key);
+    event.persist();
+    setUser((user) => {
+      return { ...user, [key]: event.target.value };
+    });
+  };
   const login = async () => {
     console.log("login");
-    // const authResp = await Auth.signIn({ username, password });
+    const authResp = await Auth.signIn({ username, password });
+    console.log(authResp);
   };
 
   const signup = async () => {
     console.log("sign up");
   };
-  const CssTextField = styled(TextField, {
-    shouldForwardProp: (props) => props !== "focusColor",
-  })((p) => ({
-    // input label when focused
-    "& label.Mui-focused": {
-      color: p.focusColor,
-    },
-    // focused color for input with variant='standard'
-    "& .MuiInput-underline:after": {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='filled'
-    "& .MuiFilledInput-underline:after": {
-      borderBottomColor: p.focusColor,
-    },
-    // focused color for input with variant='outlined'
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: p.focusColor,
-      },
-    },
-  }));
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -42,45 +38,34 @@ export const LoginForm = () => {
         <div>
           <h1>Sign Up</h1>
           <Stack spacing={4}>
-            <CssTextField
-              id="standard-first-input"
+            <FormTextfield
               label="First Name"
-              type="first"
-              autoComplete="current-first"
+              value={firstName}
               variant="standard"
-              required
-              className="login-form-textfield"
-              focusColor="#009688"
+              required={true}
+              onChange={(e) => handleInputChange(e, "firstName")}
             />
-            <CssTextField
-              id="standard-last-input"
+            <FormTextfield
               label="Last Name"
-              type="last"
-              autoComplete="current-last"
+              value={lastName}
               variant="standard"
-              required
-              className="login-form-textfield"
-              focusColor="#009688"
+              required={true}
+              onChange={(e) => handleInputChange(e, "lastName")}
             />
-            <CssTextField
-              id="standard-email-input"
+            <FormTextfield
               label="Email"
-              type="email"
-              autoComplete="current-email"
+              value={email}
               variant="standard"
-              required
-              className="login-form-textfield"
-              focusColor="#009688"
+              required={true}
+              onChange={(e) => handleInputChange(e, "email")}
             />
-            <CssTextField
-              id="standard-password-input"
+            <FormTextfield
               label="Password"
               type="password"
-              autoComplete="current-password"
+              value={newPassword}
               variant="standard"
-              required
-              className="login-form-textfield"
-              focusColor="#009688"
+              required={true}
+              onChange={(e) => handleInputChange(e, "newPassword")}
             />
             <Button
               className="login-form-button"
@@ -97,25 +82,23 @@ export const LoginForm = () => {
         <div>
           <h1>Login</h1>
           <Stack spacing={4}>
-            <CssTextField
-              id="login-email-input"
+            <FormTextfield
               label="Email"
-              type="email"
-              autoComplete="current-email"
               variant="standard"
-              required
-              className="login-form-textfield"
+              value={username}
+              onChange={(e) => handleInputChange(e, "username")}
+              required={true}
               focusColor="#009688"
             />
-            <CssTextField
+            <FormTextfield
               id="login-password-input"
               label="Password"
               type="password"
-              autoComplete="current-password"
+              value={password}
               variant="standard"
-              required
-              className="login-form-textfield"
+              required={true}
               focusColor="#009688"
+              onChange={(e) => handleInputChange(e, "password")}
             />
             <Button
               className="login-form-button"
