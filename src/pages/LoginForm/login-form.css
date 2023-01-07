@@ -31,3 +31,7 @@
     width: 1px;
     border-left: 1px solid #009688;
 }
+
+.modalBox {
+    justify-content: center;
+}

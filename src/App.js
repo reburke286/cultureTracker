@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BooksPage, LoginForm, MoviesPage, MusicPage, TVPage } from "./pages";
+import { Nav } from "./components";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 
@@ -7,6 +8,7 @@ function App() {
   Amplify.configure(awsconfig);
   return (
     <div>
+      <Nav />
       <Router>
         <Routes>
           <Route path="*" element={<LoginForm />} />
