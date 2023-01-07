@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell } from "recharts";
 import { DataTable } from "../../components";
 import { bookData } from "./2022_book_data";
 import { Rating } from "@mui/material";
-//https://www.googleapis.com/books/v1/volumes?q=pride-and-protest&key=AIzaSyCF5drnVVf7cJYaPDT3XAkaV--ZKKg8XDc
+//`https://www.googleapis.com/books/v1/volumes?q=pride-and-protest&key=${process.env.GOOGLE_BOOKS_API}`
 
 /* TABLE DATA */
 const columns = [
