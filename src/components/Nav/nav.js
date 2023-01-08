@@ -1,115 +1,48 @@
 import { useEffect, useState } from "react";
-import {
-  Avatar,
-  Box,
-  Divider,
-  IconButton,
-  ListItemIcon,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from "@mui/material";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+
+import { useNavigate } from "react-router-dom";
+import { Avatar, IconButton, Tooltip } from "@mui/material";
 import { Auth } from "aws-amplify";
+import "./nav.css";
 
 export const Nav = () => {
+  const navigate = useNavigate();
   const [initials, setInitials] = useState("");
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+
+  const logout = () => {
+    navigate("/login");
+
+    Auth.signOut();
   };
 
   const getUser = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
     console.log({ attributes });
-    setInitials(
-      attributes.name.charAt(0) + attributes["family name"].charAt(0)
-    );
+    setInitials(attributes.name.charAt(0));
   };
   useEffect(() => {
     getUser();
   }, []);
   return (
-    <>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
+    <div className="navDiv">
+      <div>
+        <a href="/books">
+          <h3>Books</h3>
+        </a>
+        <a href="/movies">
+          <h3>Movies</h3>
+        </a>
+        <a href="/music">
+          <h3>Music</h3>
+        </a>
+      </div>
+      <div>
+        <Tooltip title="Logout">
+          <IconButton onClick={logout} size="medium">
             <Avatar sx={{ width: 32, height: 32 }}>{initials}</Avatar>
           </IconButton>
         </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
-    </>
+      </div>
+    </div>
   );
 };

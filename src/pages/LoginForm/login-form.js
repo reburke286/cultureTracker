@@ -18,16 +18,24 @@ export const LoginForm = () => {
     lastName: "",
   });
   const { email, username, password, newPassword, firstName, lastName } = user;
+
+  /* FORM FIELD INPUT CHANGE */
   const handleInputChange = (event, key) => {
     event.persist();
     setUser((user) => {
       return { ...user, [key]: event.target.value };
     });
   };
+
+  /* LOGIN FUNCTIONS */
   const login = async () => {
-    console.log("login");
-    const authResp = await Auth.signIn({ username, password });
-    console.log(authResp);
+    try {
+      const authResp = await Auth.signIn({ username, password });
+      localStorage.setItem("user", authResp.attributes.email);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const signup = async () => {
@@ -72,7 +80,7 @@ export const LoginForm = () => {
     try {
       await Auth.confirmSignUp(email, confirmationCode);
       setOpen(false);
-      navigate("/books");
+      navigate("/");
     } catch (error) {
       console.log("error confirming sign up", error);
     }
