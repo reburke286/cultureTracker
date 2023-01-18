@@ -6,6 +6,7 @@ import {
   MoviesPage,
   MusicPage,
   TVPage,
+  PracticePage,
 } from "./pages";
 import { PageWrapper, PrivateRoute } from "./components";
 import { Amplify } from "aws-amplify";
@@ -17,11 +18,12 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="*" element={<LoginForm />} />
+          {/* <Route path="*" element={<LoginForm />} /> */}
           <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<PrivateRoute />}>
-            <Route exact path="/" element={<Dashboard />} />
             <Route path="/" element={<PageWrapper />}>
+              <Route path="*" element={<PracticePage />} />
+              <Route exact path="/" element={<Dashboard />} />
               <Route path="/movies" element={<MoviesPage />} />
               <Route path="/music" element={<MusicPage />} />
               <Route path="/books" element={<BooksPage />} />
