@@ -17,7 +17,6 @@ export const Nav = () => {
 
   const getUser = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
-    console.log({ attributes });
     setInitials(attributes.name.charAt(0));
   };
   useEffect(() => {
