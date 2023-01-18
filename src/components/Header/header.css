@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.header h1 {
+    color: #7163B4;
+}
+
+.headerBtn {
+    border-radius: 50%;
+    background-color: #7163B4;
+    height: 60px;
+}
+
+.headerBtn:hover {
+    background-color: #A796EC;
+    transition: all ease-in-out 0.5s;
+    transform: scale(1.2);
+}
